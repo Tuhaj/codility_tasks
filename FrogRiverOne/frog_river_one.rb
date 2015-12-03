@@ -2,12 +2,13 @@ class FrogRiverOne
 
   def solution(x, a)
     seconds = 0
-    needed_leafs = Array(1..x)
-    needed_leafs.delete(a.shift)
-    until needed_leafs.empty? do
-      needed_leafs.delete(a.shift)
+    needed_leaves = Array(1..x)
+    needed_leaves.delete(a.shift)
+    until needed_leaves.empty? || a.empty? do
+      needed_leaves.delete(a.shift)
       seconds += 1
     end
+    return -1 unless needed_leaves.empty?
     seconds
   end
 

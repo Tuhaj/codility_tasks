@@ -10,4 +10,9 @@ describe FrogRiverOne do
     array = [1]
     expect(subject.solution(1, array)).to eql(0)
   end
+
+  it "should return -1 when the frog cannot jump to the other side" do
+    array = [1,3]
+    expect(subject.solution(3, array)).to eql(-1)
+  end
 end
