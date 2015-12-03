@@ -1,9 +1,9 @@
 class PermMissingElement
 
   def solution(a)
-    all_elements = Array(1..a.max)
-    missing_element = all_elements - a
-    missing_element.first
+    return nil if a.empty?
+    all_elements = Array( 1..(a.size + 1) )
+    ( all_elements - a ).first
   end
 
 end
