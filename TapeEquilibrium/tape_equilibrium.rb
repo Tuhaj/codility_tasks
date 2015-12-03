@@ -1,17 +1,19 @@
 class TapeEquilibrium
-  def difference_after_split(array, split_point)
-    left = array[0..split_point - 1].reduce(:+)
-    right = array[split_point..-1].reduce(:+)
-    ( left - right ).abs
-  end
 
   def solution(a)
-    min = Float::INFINITY
-    all_split_points = Array(1..a.size-1)
-    all_split_points.each do |split_point|
-      puts difference_after_split(a, split_point)
-      min = [difference_after_split(a, split_point), min].min
+    split_points = ( a.size - 1 )
+    right_array = a[1..-1]
+    left_sum = a[0]
+    right_sum = right_array.reduce(:+)
+    min = (left_sum - right_sum).abs
+    split_points.times do
+      changing_element = right_array.shift
+      left_sum = left_sum + changing_element
+      right_sum = right_sum - changing_element
+      difference = (left_sum - right_sum).abs
+      min = [min, difference].min
     end
     min
   end
+
 end
