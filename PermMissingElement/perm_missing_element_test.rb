@@ -8,7 +8,7 @@ describe PermMissingElement do
 
   it "should behave when empty" do
     array = []
-    expect(subject.solution(array)).to eql(nil)
+    expect(subject.solution(array)).to eql(1)
   end
 
   it "should behave when one element given" do
