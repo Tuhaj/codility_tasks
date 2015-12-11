@@ -4,7 +4,6 @@ class MissingInteger
     last_element = nil
     missing_element = 1
     array.sort!
-    max = array.last
     array.each do |element, index|
       next if element <= 0 || last_element == element
       if element > missing_element
