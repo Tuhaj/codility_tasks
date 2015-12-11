@@ -11,4 +11,9 @@ describe PermCheck do
     expect(subject.solution(array)).to eql(0)
   end
 
+  it "should have no problems with allocating memory" do
+    array = [1000000000]
+    expect(subject.solution(array)).to eql(0)
+  end
+
 end
