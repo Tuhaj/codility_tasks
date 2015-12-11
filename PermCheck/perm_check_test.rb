@@ -16,4 +16,9 @@ describe PermCheck do
     expect(subject.solution(array)).to eql(0)
   end
 
+
+  it "should give right answer for double" do
+    array = [1, 1]
+    expect(subject.solution(array)).to eql(0)
+  end
 end
