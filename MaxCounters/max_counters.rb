@@ -1,6 +1,6 @@
 class MaxCounters
   def solution(number, array)
-    counters = [0] * number
+    counters = Array.new(number, 0)
     max = 0
     array.each do |e|
       if e <= number
@@ -9,7 +9,7 @@ class MaxCounters
         max = new_value if max < new_value
         counters[e - 1] = new_value
       else
-        counters = [max]  * number
+        counters = Array.new(number, max)
       end
     end
     counters
