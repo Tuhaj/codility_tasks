@@ -17,4 +17,8 @@ describe CountDiv do
     expect(subject.solution(0, 0, 11)).to eql(1)
   end
 
+  it "should return one element if it is on both edges of the range" do
+    expect(subject.solution(0, 4, 2)).to eql(3)
+  end
+
 end
