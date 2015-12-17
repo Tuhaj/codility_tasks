@@ -18,4 +18,10 @@ describe MaxCounters do
     expected_array =  [0, 0]
     expect(subject.solution(2, array)).to eql(expected_array)
   end
+
+  it "all max counters" do
+    array = [6, 6, 6, 6]
+    expected_array =  [0, 0, 0, 0, 0]
+    expect(subject.solution(5, array)).to eql(expected_array)
+  end
 end
