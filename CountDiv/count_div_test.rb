@@ -21,4 +21,16 @@ describe CountDiv do
     expect(subject.solution(0, 4, 2)).to eql(3)
   end
 
+  it "should returns good answer for simple input" do
+    expect(subject.solution(11, 345, 17)).to eql(20)
+  end
+
+  it "should get one element from a range" do
+    expect(subject.solution(3, 5, 4)).to eql(1)
+  end
+
+  it "should get one element extream range" do
+    expect(subject.solution(11, 13, 2)).to eql(1)
+  end
+
 end
