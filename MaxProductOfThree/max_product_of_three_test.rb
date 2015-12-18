@@ -15,4 +15,9 @@ describe MaxProductOfThree do
     array = [1, 0, 3, 1]
     expect(subject.solution(array)).to eql(3)
   end
+
+  it "should find the maximal product of triplet with two negative numbers" do
+    array = [-5, 5, -5, 4]
+    expect(subject.solution(array)).to eql(125)
+  end
 end
