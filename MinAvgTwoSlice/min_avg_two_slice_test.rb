@@ -10,4 +10,9 @@ describe MinAvgTwoSlice do
     array = [5, 6, 3, 4, 9]
     expect(subject.solution(array)).to eql(2)
   end
+
+  it "should return the begining of min avg slice for codility test" do
+    array = [-3, -3, 10, -10, 10, -10, 10, -10, 10, -3, -3, 100, -11]
+    expect(subject.solution(array)).to eql(3)
+  end
 end
