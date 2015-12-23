@@ -12,6 +12,18 @@ class GenomicRangeQuery
     end
   end
 
+  # def return_min_in_substring(string)
+  #   min = 4
+  #   string.split('').each do |char|
+  #     return 1 if char == 'A'
+  #     min = 2 if min > 2 && char == 'C'
+  #     if min == 4
+  #       min = 3 if char == 'G'
+  #     end
+  #   end
+  #   min
+  # end
+
   def solution(s, p, q)
     answers = []
     p.each_with_index do |e, index|
