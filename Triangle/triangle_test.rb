@@ -25,6 +25,11 @@ describe Triangle do
     expect(subject.solution(array)).to eql(0)
   end
 
+  it 'should not allow 180 degrees triangles like 1 1 2' do
+    array = [1, 1, 2, 3, 5]
+    expect(subject.solution(array)).to eql(0)
+  end
+
   it 'checks if numbers are in triangle condition' do
     expect(subject.is_in_triangle_condition(3,4,5)).to eql(true)
     expect(subject.is_in_triangle_condition(4,4,10)).to eql(false)

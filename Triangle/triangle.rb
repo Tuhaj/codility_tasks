@@ -15,9 +15,9 @@ class Triangle
   end
 
   def is_in_triangle_condition(a, b, c)
-    a + b >= c &&
-    b + c >= a &&
-    a + c >= b
+    a + b > c &&
+    b + c > a &&
+    a + c > b
   end
 
 end
