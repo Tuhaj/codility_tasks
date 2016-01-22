@@ -1,37 +1,22 @@
 class NumberOfDiscIntersections
   def solution(array)
-    return 0 if array.empty?
     intersections = 0
-    openings = []
-    closings = []
+    values_hash = Hash.new(0)
     array.each_with_index do |radius, index|
-      opening = index - radius
-      closing = index + radius
-      openings << opening
-      closings << closing
+      opening = (index - radius) * 2
+      closing = (index + radius) * 2 + 1
+      values_hash[opening] += 1
+      values_hash[closing] -= 1
     end
-    openings.sort!
-    closings.sort!
-    minimum = openings.first
-    minimum = 0 if minimum > 0
-    last_element = closings.last
-    size = (minimum - last_element).abs + 1
-    flat_array = Array.new(size*2, 0)
-    openings.each do |opening|
-      even_index = 2*(opening - minimum)
-      flat_array[even_index] += 1
-    end
-    closings.each do |closing|
-      odd_index = 2*(closing - minimum)+1
-      flat_array[odd_index] -= 1
-    end
+    values_hash = values_hash.sort.to_h
+
     open = 0
-    flat_array.each do |el|
-      if el > 0
-        open += el
-      elsif el < 0
-        (-el).times do
+    values_hash.each do |key, value|
+      open += value if value > 0
+      if value < 0
+        (-value).times do
           intersections += (open -1) if open > 1
+          return -1 if intersections > 10_000_000
           open -= 1
         end
       end
@@ -39,4 +24,3 @@ class NumberOfDiscIntersections
     intersections
   end
 end
-

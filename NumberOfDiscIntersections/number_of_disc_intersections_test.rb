@@ -25,4 +25,10 @@ describe NumberOfDiscIntersections do
     array = []
     expect(subject.solution(array)).to eql(0)
   end
+
+  it 'should return 2 for strange array' do
+    array = [1, 2147483647, 0]
+    expect(subject.solution(array)).to eql(2)
+  end
+
 end
