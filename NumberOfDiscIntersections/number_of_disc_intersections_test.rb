@@ -1,0 +1,18 @@
+require_relative 'number_of_disc_intersections'
+
+describe NumberOfDiscIntersections do
+  # it 'should return all intersections between circles' do
+  #   array = [1, 5, 2, 1, 4, 0]
+  #   expect(subject.solution(array)).to eql(11)
+  # end
+
+  it 'should return all intersections between circles with different array' do
+    array = [0, 0, 1, 2, 0, 3]
+    expect(subject.solution(array)).to eql(7)
+  end
+
+  # it 'should return 0 for empty array' do
+  #   array = []
+  #   expect(subject.solution(array)).to eql(0)
+  # end
+end
