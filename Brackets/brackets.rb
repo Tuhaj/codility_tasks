@@ -1,18 +1,14 @@
 class Brackets
   def solution(string)
     return 1 if string == ""
-    matching_brackets = {
-      ")" => "(",
-      "}" => "{",
-      "]" => "["
-    }
+    opening_brackets = ["(", "[", "{"]
+    closing_brackets = [")", "]", "}"]
+    matching_brackets = closing_brackets.zip(opening_brackets).to_h
     bracket_counters = {
       "(" => 0,
       "{" => 0,
       "[" => 0,
     }
-    opening_brackets = ["(", "[", "{"]
-    closing_brackets = [")", "]", "}"]
     array = string.split('')
     last_bracket = array.shift
     return 0 if closing_brackets.include?(last_bracket)
