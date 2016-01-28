@@ -6,6 +6,6 @@ class Nesting
       open -= 1 if bracket == ")"
       return 0 if open < 0
     end
-    1
+    open == 0 ? 1 : 0
   end
 end

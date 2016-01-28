@@ -11,7 +11,7 @@ describe Nesting do
     expect(subject.solution(string)).to eql(0)
   end
 
-  it 'should return false for wrong nested' do
+  it 'should return false for wrong nested, but with the right number of openings and closings' do
     string = '()(()()(((()())(()()))'
     expect(subject.solution(string)).to eql(0)
   end
