@@ -6,8 +6,8 @@ describe StoneWall do
     expect(subject.solution(array)).to eql(7)
   end
 
-  # it 'should return 1 for one level' do
-  #   array = [5, 5, 5]
-  #   expect(subject.solution(array)).to eql(1)
-  # end
+  it 'should return 1 for one level' do
+    array = [5, 5, 5]
+    expect(subject.solution(array)).to eql(1)
+  end
 end

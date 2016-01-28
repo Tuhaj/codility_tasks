@@ -4,17 +4,13 @@ class StoneWall
     possible_levels = []
     last_level = 0
     blocks = 0
-
     array.each do |level|
-      blocks += 1 if level > last_level
-      if level < last_level
-        if possible_levels.include? level
-          possible_levels = possible_levels.select{|el| el <= level}
-          next
-        else
-          possible_levels = possible_levels.select{|el| el <= level}
-          blocks += 1
-        end
+      if level > last_level
+        blocks += 1
+      else
+        possible_levels = possible_levels.reject{|el| el > level}
+        next if possible_levels.include? level
+        blocks += 1
       end
       possible_levels << level
       last_level = level
