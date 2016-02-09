@@ -1,19 +1,21 @@
-require "set"
-
 class StoneWall
 
   def solution(array)
-    possible_levels = SortedSet.new
-    last_level = 0
+    possible_levels = [0] * array.size
     blocks = 0
+    index = 0
+
     array.each do |level|
-      if level <= last_level
-        possible_levels.reject! { |el| el > level }
-        next if possible_levels.include? level
+      while index > 0 && possible_levels[index - 1] > level
+        index -= 1
       end
-      blocks += 1
-      possible_levels << level
-      last_level = level
+      if index > 0 && possible_levels[index - 1] == level
+        next
+      else
+        blocks += 1
+        possible_levels[index] = level
+        index += 1
+      end
     end
     blocks
   end
