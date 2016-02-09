@@ -1,35 +1,33 @@
 class EquiLeader
   def solution(array)
-    equi_leaders = []
-    candidate = find_leader(array)
-    array.size.times do |index|
-      if check_candidate(candidate, (array[0..index]))
-        equi_leaders << index if check_candidate(candidate, array[(index+1)..-1])
-      end
+    numbers = Hash.new(0)
+    max = [0, 0]
+    leader = ( array.size / 2 )
+    array.each do |number|
+      numbers[number] += 1
+      number_with_count = [number, numbers[number]]
+      max = number_with_count if number_with_count[1] > max[1]
     end
-    equi_leaders.size
-  end
+    return 0 if leader >= max[1]
 
-  def find_leader(array)
-    size = 0
-    value = array.first
-    array.each do |el|
-      if (size == 0)
-        size += 1
-        value = el
-      else
-        value != el ? size -= 1 : size += 1
+    candidate = max[0]
+    equi_leaders = 0
+    left_size = 0
+    right_size = array.size
+    left_leader_count = 0
+    right_leader_count = max[1]
+
+    array.each do |number|
+      left_size += 1
+      right_size -= 1
+      if number == candidate
+        left_leader_count += 1
+        right_leader_count -= 1
       end
+      is_left_leader = (left_size / 2) < left_leader_count
+      is_right_leader = (right_size / 2) < right_leader_count
+      equi_leaders += 1 if is_left_leader && is_right_leader
     end
-    candidate = -1
-    candidate = value if (size > 0)
-    leader = -1
-    leader = candidate if check_candidate(candidate, array)
-  end
-
-  def check_candidate(candidate, array)
-    count = 0
-    array.each {|el| count += 1 if (el == candidate) }
-    count > array.size / 2
+    equi_leaders
   end
 end
