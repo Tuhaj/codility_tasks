@@ -1,14 +1,10 @@
 class EquiLeader
   def solution(array)
     equi_leaders = []
+    candidate = find_leader(array)
     array.size.times do |index|
-      first_leader = find_leader((array[0..index]))
-      if first_leader != -1
-        second_part = array[(index+1)..-1]
-        second_leader = find_leader(second_part)
-        if second_leader == first_leader
-          equi_leaders << index
-        end
+      if check_candidate(candidate, (array[0..index]))
+        equi_leaders << index if check_candidate(candidate, array[(index+1)..-1])
       end
     end
     equi_leaders.size
@@ -28,11 +24,12 @@ class EquiLeader
     candidate = -1
     candidate = value if (size > 0)
     leader = -1
+    leader = candidate if check_candidate(candidate, array)
+  end
+
+  def check_candidate(candidate, array)
     count = 0
-    array.each do |el|
-      count += 1 if (el == candidate)
-    end
-    leader = candidate if (count > array.size / 2)
-    leader
+    array.each {|el| count += 1 if (el == candidate) }
+    count > array.size / 2
   end
 end
