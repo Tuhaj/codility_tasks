@@ -6,9 +6,19 @@ describe MaxDoubleSliceSum do
     expect(subject.solution(array)).to eql(17)
   end
 
-  it "returns max double slice for small array" do
-    array = [1,1,1]
+  it "returns 0 for 3 elements array" do
+    array = [1, 1, 1]
     expect(subject.solution(array)).to eql(0)
+  end
+
+  it "returns max double slice for 4 element array" do
+    array = [5, 17, 0, 3]
+    expect(subject.solution(array)).to eql(17)
+  end
+
+  it "returns max double slice for all positive numbers" do
+    array = [6, 1, 5, 6, 4, 2, 9, 4]
+    expect(subject.solution(array)).to eql(26)
   end
 
   it "#max_slice returns the biggest slice" do
