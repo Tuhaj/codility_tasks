@@ -23,7 +23,7 @@ describe MaxDoubleSliceSum do
 
   it "returns max double slice for positive numbers with negative ending" do
     array = [1, 2, 5, 4, -1, -1]
-    expect(subject.solution(array)).to eql(6)
+    expect(subject.solution(array)).to eql(11)
   end
 
   it "#max_slice returns the biggest slice" do

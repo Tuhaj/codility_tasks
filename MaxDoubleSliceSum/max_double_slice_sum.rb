@@ -1,33 +1,30 @@
 class MaxDoubleSliceSum
   def solution(array)
-    size = array.size
-    return 0 if size < 4
-    array.shift
-    array.pop
-    last_element_index = size - 3
-    max_ending, max_slice = 0, 0
-    flop = array[1]
+    return 0 if array.size < 4
+    max_slice = 0
+    left_prefix_sums = [0]
+    right_prefix_sums = [0]
+    left_sum = 0
+    right_sum = 0
+    array[1..-3].each do |el|
+      left_sum += el
+      left_sum = [left_sum, 0].max
+      left_prefix_sums << left_sum
+    end
 
-    array.each_with_index do |el, index|
-      next if index == 1
-      if max_ending + el < 0
-        if last_element_index != index
-          if max_ending + flop < 0
-            max_ending = 0
-          else
-            max_ending += flop
-            flop = el
-          end
-        end
-      else
-        if el < flop && last_element_index != index
-          max_ending += flop
-          flop = el
-        else
-          max_ending = max_ending + el
-        end
-      end
-      max_slice = [max_slice, max_ending].max
+    array.reverse!
+
+    array[1..-3].each do |el|
+      right_sum += el
+      right_sum = [right_sum, 0].max
+      right_prefix_sums << right_sum
+    end
+
+    Array(1..array.size - 2).each do |index|
+      max_slice = [
+        max_slice,
+        left_prefix_sums[index - 1] + right_prefix_sums[-index]
+      ].max
     end
     max_slice
   end
