@@ -11,14 +11,16 @@ class MaxDoubleSliceSum
     array.each_with_index do |el, index|
       next if index == 1
       if max_ending + el < 0
-        if max_ending + flop < 0
-          max_ending = 0
-        else
-          max_ending += flop
-          el = flop
+        if last_element_index != index
+          if max_ending + flop < 0
+            max_ending = 0
+          else
+            max_ending += flop
+            flop = el
+          end
         end
       else
-        if el < flop
+        if el < flop && last_element_index != index
           max_ending += flop
           flop = el
         else
