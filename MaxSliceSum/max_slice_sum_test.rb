@@ -7,7 +7,17 @@ describe MaxSliceSum do
   end
 
   it "returns correct solution, when it is a one element in the array" do
-    array = [3, 2, -6, 7, 0]
+    array = [ 3, 2, -6, 7, 0 ]
     expect(subject.solution(array)).to eql 7
+  end
+
+  it "returns correct solution for simple input" do
+    array = [ -2, 1 ]
+    expect(subject.solution(array)).to eql 1
+  end
+
+  it "returns correct solution for single element array" do
+    array = [ -10]
+    expect(subject.solution(array)).to eql -10
   end
 end
