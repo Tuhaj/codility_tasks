@@ -6,22 +6,17 @@ class Peaks
     result = 1
     size = array.size
     factors = get_factors(size)
-    max_size = peaks.size
-    bin_array = array_to_binary(peaks)
-    factors.each do |factor|
+    bin_peaks = array_to_binary(peaks)
+    result = factors.find do |factor|
       range = size / factor
       mask = 2 ** range - 1
-      if mask_covers_the_block?(bin_array, mask)
-        result = factor
-        break
-      end
+      mask_covers_the_array?(bin_peaks, mask, size)
     end
-    result < max_size ? result : max_size
   end
 
-  def mask_covers_the_block?(bin_array, mask)
-    slices = bin_array.bit_length / mask.bit_length
-    (0..slices).none? { |shift| (bin_array & (mask << shift)).zero? }
+  def mask_covers_the_array?(bin_peaks, mask, array_size)
+    slices = (array_size / mask.bit_length) - 1
+    (0..slices).all? { |shift| (bin_peaks & (mask << shift * mask.bit_length)).nonzero? }
   end
 
   def get_peaks(array)

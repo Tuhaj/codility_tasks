@@ -41,12 +41,7 @@ describe Peaks do
     expect(subject.get_peaks(array)).to eql [ 3, 5, 10 ]
   end
 
-  it "largest_distance_between_peaks should return greatest distance" do
-    array = [ 1, 2, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2 ]
-    expect(subject.get_peaks(array)).to eql [ 3, 5, 10 ]
-  end
-
-  it "largest_distance_between_peaks should return greatest distance" do
+  it "array_to_binary should return correct bin" do
     array = [ 1, 3, 7 ]
     expect(subject.array_to_binary(array)).to eql 0b10001010
   end
