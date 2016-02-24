@@ -3,10 +3,18 @@ class Peaks
     peaks = get_peaks(array)
     return 0 if peaks.count == 0
     return 1 if peaks.count == 1
+    result = 1
     size = array.size
-    max_distance = max_distance_between_peaks(peaks, size)
-    puts "max distance #{max_distance}, size over distance: #{size / (max_distance + 1)}"
-    ( size / (max_distance + 1) )
+    factors = get_factors(size)
+    max_size = peaks.size
+    factors.each do |factor|
+      if each_block_has_peak?(array, peaks, factor)
+        result = factor
+        break
+      end
+    end
+    puts "array #{array} result: #{result} max_size: #{max_size}"
+    result < max_size ? result : max_size
   end
 
   def get_peaks(array)
@@ -25,32 +33,34 @@ class Peaks
     peaks_indexes
   end
 
-  def max_distance_between_peaks(peaks_indexes, array_size)
-    previous_peak = peaks_indexes.first
-    distances = [previous_peak]
-    peaks_indexes.each_with_index do |peak, index|
-      next if index == 0
-      distance = previous_peak - peak
-      distances << distance
+  def each_block_has_peak?(array, peaks_indexes, range)
+    has_peak = false
+    index_point = 0
+    Array(0..array.size).each do |n|
+      if peaks_indexes.include?(n)
+        has_peak = true
+      end
+      if index_point % range == (range - 1)
+        return false if has_peak == false
+        has_peak = false
+      end
+      index_point += 1
     end
-    last_peak = peaks_indexes.last
-    last_distance = array_size - last_peak - 1
-    distances << last_distance
-    distances.max
   end
 
   def get_factors(number)
-    fractors = []
+    factors = []
     root_of_number = (number ** ( 1.0 / 2) )
     if root_of_number % 1 == 0
-      fractors << root_of_number.to_i
+      factors << root_of_number.to_i
     end
     Array(1..root_of_number.floor).each do |divisor|
       if number % divisor == 0
-        fractors << divisor
-        fractors << ( number / divisor )
+        factors << divisor
+        factors << ( number / divisor )
       end
     end
-    fractors.sort
+    factors.delete(number)
+    factors.sort!.reverse!
   end
 end
