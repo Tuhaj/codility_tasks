@@ -7,14 +7,21 @@ class Peaks
     size = array.size
     factors = get_factors(size)
     max_size = peaks.size
+    bin_array = array_to_binary(peaks)
     factors.each do |factor|
-      if each_block_has_peak?(array, peaks, factor)
+      range = size / factor
+      mask = 2 ** range - 1
+      if mask_covers_the_block?(bin_array, mask)
         result = factor
         break
       end
     end
-    puts "array #{array} result: #{result} max_size: #{max_size}"
     result < max_size ? result : max_size
+  end
+
+  def mask_covers_the_block?(bin_array, mask)
+    slices = bin_array.bit_length / mask.bit_length
+    (0..slices).none? { |shift| (bin_array & (mask << shift)).zero? }
   end
 
   def get_peaks(array)
@@ -33,21 +40,6 @@ class Peaks
     peaks_indexes
   end
 
-  def each_block_has_peak?(array, peaks_indexes, range)
-    has_peak = false
-    index_point = 0
-    Array(0..array.size).each do |n|
-      if peaks_indexes.include?(n)
-        has_peak = true
-      end
-      if index_point % range == (range - 1)
-        return false if has_peak == false
-        has_peak = false
-      end
-      index_point += 1
-    end
-  end
-
   def get_factors(number)
     factors = []
     root_of_number = (number ** ( 1.0 / 2) )
@@ -62,5 +54,13 @@ class Peaks
     end
     factors.delete(number)
     factors.sort!.reverse!
+  end
+
+  def array_to_binary(array)
+    number = 0
+    array.each do |el|
+      number = number | 1 << el
+    end
+    number
   end
 end
